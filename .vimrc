@@ -24,13 +24,14 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 	NeoBundle 'ujihisa/unite-colorscheme'
 	NeoBundle "Shougo/neocomplete.vim"
 	NeoBundle "thinca/vim-quickrun"
+	NeoBundle 'vim-scripts/SearchComplete'
+	NeoBundle 'Lokaltog/vim-easymotion'
 	NeoBundle 'itchyny/lightline.vim'
 call neobundle#end()
 
 filetype plugin indent on
 
 NeoBundleCheck
-
 
 "--------------------------------------
 "	settings about shortcuts 
@@ -56,6 +57,7 @@ endif
 
 "Other settings
 set hlsearch
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -72,6 +74,7 @@ augroup vimrc-cpp
 	autocmd FileType cpp call s:cpp()
 augroup END
 
+"For programming
 function! s:cpp()
 	setlocal cindent
 	setlocal cinoptions=g-1
