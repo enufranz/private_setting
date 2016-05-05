@@ -48,6 +48,24 @@ nnoremap <silent> ,ug :<C-u>Unite grep<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,vsc :<C-u>VimShellCreate<CR>
 
+"Easy Motion
+"Cited from  http://haya14busa.com/mastering-vim-easymotion/
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s2)
+xmap s <Plug>(easymotion-s2)
+omap z <Plug>(easymotion-s2)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_keys = ';HKLYUIOPNM,QWERTASDGZXCVBJF'
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+
 "For lightline
 set laststatus=2
 let g:lightline = { 'colorscheme': 'wombat' }
