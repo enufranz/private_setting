@@ -16,17 +16,21 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 			\ 'unix' : 'make -f make_unix.mak',
 		\ },
 	\ }
-	NeoBundle 'VimClojure'
 	NeoBundle 'Shougo/vimshell'
 	NeoBundle 'Shougo/neomru.vim'
 	NeoBundle 'Shougo/unite.vim'
 	NeoBundle 'Shougo/unite-outline'
+    NeoBundle 'flazz/vim-colorschemes'
 	NeoBundle 'ujihisa/unite-colorscheme'
-	NeoBundle "Shougo/neocomplete.vim"
-	NeoBundle "thinca/vim-quickrun"
+	NeoBundle 'Shougo/neocomplete.vim'
+	NeoBundle 'thinca/vim-quickrun'
 	NeoBundle 'vim-scripts/SearchComplete'
-	NeoBundle 'Lokaltog/vim-easymotion'
+	NeoBundle 'easymotion/vim-easymotion'
 	NeoBundle 'itchyny/lightline.vim'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'scrooloose/syntastic'
+    NeoBundle 'osyo-manga/unite-quickfix'
+    NeoBundle 'tsukkee/unite-tag'
 call neobundle#end()
 
 filetype plugin indent on
@@ -34,26 +38,26 @@ filetype plugin indent on
 NeoBundleCheck
 
 "--------------------------------------
-"	settings about shortcuts 
+"	settings for plugins
 "-------------------------------------
 
+"Unite
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
+let g:unite_source_file_mru_limit = 100
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ubd :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ufr :<C-u>Unite file_rec/async<CR>
 nnoremap <silent> ,ufm :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,ug :<C-u>Unite grep<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
+nnoremap <silent> ,uq :<C-u>Unite quickfix<CR>
+nnoremap <silent> ,ut :<C-u>Unite tag<CR>
 nnoremap <silent> ,vsc :<C-u>VimShellCreate<CR>
 
 "Easy Motion
-"Cited from  http://haya14busa.com/mastering-vim-easymotion/
 let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-s2)
-xmap s <Plug>(easymotion-s2)
-omap z <Plug>(easymotion-s2)
+nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -66,24 +70,32 @@ nmap g/ <Plug>(easymotion-sn)
 xmap g/ <Plug>(easymotion-sn)
 omap g/ <Plug>(easymotion-tn)
 
-"For lightline
+"lightline
 set laststatus=2
 let g:lightline = { 'colorscheme': 'wombat' }
 if !has('gui_running')
 	set t_Co=256
 endif
 
-"Other settings
+"--------------------------------------
+"	 plain-vim settings
+"-------------------------------------
+
+"Style
+colorscheme znake
+
+"Search
 set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+vnoremap * "zy:let @/ = @z<CR>n
+
+"Indent
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set autoindent
 set smartindent
-
-"Search by astar in select-mode
-vnoremap * "zy:let @/ = @z<CR>n
 
 "Indent for programming
 augroup vimrc-cpp
@@ -97,3 +109,10 @@ function! s:cpp()
 	setlocal cindent
 	setlocal cinoptions=g-1
 endfunction
+
+"diff
+set diffopt+=vertical
+hi DiffAdd    ctermfg=black ctermbg=2
+hi DiffChange ctermfg=black ctermbg=3
+hi DiffDelete ctermfg=black ctermbg=6
+hi DiffText   ctermfg=black ctermbg=7
