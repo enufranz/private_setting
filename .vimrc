@@ -31,6 +31,10 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'scrooloose/syntastic'
     NeoBundle 'osyo-manga/unite-quickfix'
     NeoBundle 'tsukkee/unite-tag'
+
+    "Web Developement
+    NeoBundle 'mattn/emmet-vim'
+    NeoBundle 'open-browser.vim'
 call neobundle#end()
 
 filetype plugin indent on
